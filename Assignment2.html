@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ahads's Web Form</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for form */
+        body {
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border: 1px solid #dcdcdc;
+            border-radius: 10px;
+            margin: 50px auto;
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        label {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        /* Style the Submit button */
+        .btn-primary {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #c82333;
+        }
+
+        /* Validation Alerts */
+        .alert {
+            display: none;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            color: #721c24;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        /* Custom Form Layout */
+        .custom-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .custom-form .form-group {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>Contact Us</h2>
+        <p>Reach out to us in a unique way!</p>
+    </div>
+    <div class="container">
+        <form id="uniqueContactForm">
+            <div class="custom-form">
+                <div class="form-group">
+                    <label for="uniqueFullName">Your Full Name:</label>
+                    <input type="text" class="form-control" id="uniqueFullName" placeholder="Enter your full name" required>
+                    <div class="alert alert-danger" id="uniqueFullNameAlert">Please provide your full name.</div>
+                </div>
+                <div class="form-group">
+                    <label for="uniqueEmail">Email Address:</label>
+                    <input type="email" class="form-control" id="uniqueEmail" placeholder="Enter your email address" required>
+                    <div class="alert alert-danger" id="uniqueEmailAlert">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group">
+                    <label for="uniqueDepartment">Select a Department:</label>
+                    <select class="form-control" id="uniqueDepartment">
+                        <option>Sales</option>
+                        <option>Support</option>
+                        <option>General Inquiry</option>
+                    </select>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="uniqueNewsletter">
+                    <label class="form-check-label" for="uniqueNewsletter">Subscribe to Our Newsletter</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="uniquePhone">Phone Number:</label>
+                <input type="text" class="form-control" id="uniquePhone" placeholder="Enter your phone number" required>
+                <div class="alert alert-danger" id="uniquePhoneAlert">Please enter your phone number.</div>
+            </div>
+            <div class="form-group">
+                <label for="uniqueMessage">Message:</label>
+                <textarea class="form-control" id="uniqueMessage" rows="5" placeholder="Type your message here"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Inquiry</button>
+        </form>
+    </div>
+    <!-- Add Bootstrap JS and jQuery (for Bootstrap) links if needed -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Custom form validation
+        document.getElementById('uniqueContactForm').addEventListener('submit', function (e) {
+            let valid = true;
+            const fullName = document.getElementById('uniqueFullName');
+            const email = document.getElementById('uniqueEmail');
+            const phone = document.getElementById('uniquePhone');
+
+            // Full Name validation
+            if (fullName.value.trim() === '') {
+                document.getElementById('uniqueFullNameAlert').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('uniqueFullNameAlert').style.display = 'none';
+            }
+
+            // Email validation
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email.value)) {
+                document.getElementById('uniqueEmailAlert').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('uniqueEmailAlert').style.display = 'none';
+            }
+
+            // Phone Number validation
+            if (phone.value.trim() === '') {
+                document.getElementById('uniquePhoneAlert').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('uniquePhoneAlert').style.display = 'none';
+            }
+
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>
