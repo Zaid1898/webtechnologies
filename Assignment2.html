@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Ahads's Web Form</title>
+    <title>Ahads's Web Form - 3 Steps</title>
     <!-- Add Bootstrap CSS link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -11,14 +10,12 @@
             background-color: #f8f8f8;
             font-family: Arial, sans-serif;
         }
-
         .header {
             background-color: #343a40;
             color: #fff;
             text-align: center;
             padding: 20px;
         }
-
         .container {
             background-color: #fff;
             border: 1px solid #dcdcdc;
@@ -27,27 +24,22 @@
             padding: 30px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
-
         .form-group {
             margin: 15px 0;
         }
-
         label {
             font-weight: bold;
             color: #343a40;
         }
-
         /* Style the Submit button */
         .btn-primary {
             background-color: #dc3545;
             border: none;
             color: #fff;
         }
-
         .btn-primary:hover {
             background-color: #c82333;
         }
-
         /* Validation Alerts */
         .alert {
             display: none;
@@ -58,20 +50,32 @@
             padding: 10px;
             margin-top: 5px;
         }
-
         /* Custom Form Layout */
         .custom-form {
+            display: none;
+        }
+        .custom-form.active {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-
         .custom-form .form-group {
             margin: 0;
         }
+        .step-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .step-button {
+            margin: 0 10px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
     </style>
 </head>
-
 <body>
     <div class="header">
         <h2>Contact Us</h2>
@@ -79,7 +83,8 @@
     </div>
     <div class="container">
         <form id="uniqueContactForm">
-            <div class="custom-form">
+            <!-- Step 1: Personal Information -->
+            <div class="custom-form active" id="step-1">
                 <div class="form-group">
                     <label for="uniqueFullName">Your Full Name:</label>
                     <input type="text" class="form-control" id="uniqueFullName" placeholder="Enter your full name" required>
@@ -102,17 +107,36 @@
                     <input type="checkbox" class="form-check-input" id="uniqueNewsletter">
                     <label class="form-check-label" for="uniqueNewsletter">Subscribe to Our Newsletter</label>
                 </div>
+                <div class="step-button-container">
+                    <button type="button" class="btn btn-primary step-button" onclick="nextStep(1)">Next</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="uniquePhone">Phone Number:</label>
-                <input type="text" class="form-control" id="uniquePhone" placeholder="Enter your phone number" required>
-                <div class="alert alert-danger" id="uniquePhoneAlert">Please enter your phone number.</div>
+
+            <!-- Step 2: Contact Details -->
+<div class="custom-form" id="step-2">
+    <div class="form-group">
+        <label for="uniquePhone">Phone Number:</label>
+        <input type="text" class="form-control" id="uniquePhone" placeholder="Enter your phone number" required>
+        <div class="alert alert-danger" id="uniquePhoneAlert">Please enter your phone number.</div>
+    </div>
+    <div class="form-group">
+        <label for="uniqueMessage">Message:</label>
+        <textarea class="form-control" id="uniqueMessage" rows="5" placeholder="Type your message here"></textarea>
+    </div>
+    <div class="step-button-container">
+        <button type="button" class="btn btn-primary step-button" onclick="prevStep(1)">Previous</button>
+        <button type="button" class="btn btn-primary step-button" onclick="nextStep(2)">Next</button>
+    </div>
+</div>
+
+
+            <!-- Step 3: Submit Form -->
+            <div class="custom-form" id="step-3">
+                <div class="btn-container">
+                    <button type="button" class="btn btn-primary step-button" onclick="prevStep(2)">Previous</button>
+                    <button type="submit" class="btn btn-primary step-button">Submit</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="uniqueMessage">Message:</label>
-                <textarea class="form-control" id="uniqueMessage" rows="5" placeholder="Type your message here"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Send Inquiry</button>
         </form>
     </div>
     <!-- Add Bootstrap JS and jQuery (for Bootstrap) links if needed -->
@@ -156,7 +180,17 @@
                 e.preventDefault();
             }
         });
+
+        // Step navigation
+        function nextStep(step) {
+            document.getElementById(`step-${step}`).classList.remove('active');
+            document.getElementById(`step-${step + 1}`).classList.add('active');
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step-${step}`).classList.remove('active');
+            document.getElementById(`step-${step - 1}`).classList.add('active');
+        }
     </script>
 </body>
-
 </html>
