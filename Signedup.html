@@ -1,174 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Modern Web Form - 3 Steps</title>
-    <!-- Add Bootstrap CSS link -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Custom CSS for form */
-        body {
-            background-color: #f2f2f2;
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            background-color: #4CAF50;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin-top: 50px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-        }
-        /* Style the Submit button */
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-        /* Validation Alerts */
-        .alert {
-            display: none;
-        }
-        .step-button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .step-button {
-            margin: 0 10px;
-        }
-        .step {
-            display: none;
-        }
-        .step.active {
-            display: block;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="header">
-        <h2>Contact Us</h2>
-        <p>An intelligent way to get in touch with us!</p>
-    </div>
-    <div class="container">
-        <form id="contactForm">
-            <!-- Step 1: Personal Information -->
-            <div class="step active" id="step-1">
-                <div class="form-group">
-                    <label for="fullName">Full Name:</label>
-                    <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
-                    <div class="alert alert-danger" id="fullNameAlert">Please enter your full name.</div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
-                    <div class="alert alert-danger" id="emailAlert">Please enter a valid email address.</div>
-                </div>
-                <div class="step-button-container">
-                    <button type="button" class="btn btn-primary step-button" onclick="nextStep(1)">Next</button>
-                </div>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-8">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <h1 class="text-2xl font-semibold mb-4">Hostel Registration Form</h1>
+
+            <!-- Step Navigation Tabs -->
+            <div class="mb-4">
+                <ul class="flex">
+                    <li class="mr-2">
+                        <a href="#" data-step="personal" class="tab-button px-4 py-2 hover:text-blue-600 transition duration-300">Personal Info</a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="#" data-step="room" class="tab-button px-4 py-2 hover:text-blue-600 transition duration-300">Room Selection</a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="#" data-step="payment" class="tab-button px-4 py-2 hover:text-blue-600 transition duration-300">Payment</a>
+                    </li>
+                    <li>
+                        <a href="#" data-step="review" class="tab-button px-4 py-2 hover:text-blue-600 transition duration-300">Review</a>
+                    </li>
+                </ul>
             </div>
 
-            <!-- Step 2: Contact Details -->
-            <div class="step" id="step-2">
-                <div class="form-group">
-                    <label for="phone">Phone Number:</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Enter your phone number" required>
-                    <div class="alert alert-danger" id="phoneAlert">Please enter your phone number.</div>
+            <!-- Step Forms -->
+            <form id="registrationForm">
+                <!-- Personal Info Step -->
+                <div class="step" id="personal">
+                    <div class="mb-4">
+                        <label for="full_name" class="block text-gray-600">Full Name</label>
+                        <input type="text" id="full_name" name="full_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="John Doe" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="date_of_birth" class="block text-gray-600">Date of Birth</label>
+                        <input type="date" id="date_of_birth" name="date_of_birth" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-600">Gender</label>
+                        <div class="flex items-center">
+                            <input type="radio" id="male" name="gender" value="male" class="mr-2">
+                            <label for="male">Male</label>
+                            <input type="radio" id="female" name="gender" value="female" class="mr-2 ml-4">
+                            <label for="female">Female</label>
+                            <input type="radio" id="other_gender" name="gender" value="other" class="mr-2 ml-4">
+                            <label for="other_gender">Other</label>
+                        </div>
+                    </div>
+                    <!-- Add more personal information fields here -->
+                    <button type="button" class="next-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300" data-next-step="room">Next</button>
                 </div>
-                <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
-                </div>
-                <div class="step-button-container">
-                    <button type="button" class="btn btn-primary step-button" onclick="prevStep(1)">Previous</button>
-                    <button type="button" class="btn btn-primary step-button" onclick="nextStep(2)">Next</button>
-                </div>
-            </div>
 
-            <!-- Step 3: Department Selection -->
-            <div class="step" id="step-3">
-                <div class="form-group">
-                    <label for="department">Select a Department:</label>
-                    <select class="form-control" id="department">
-                        <option>Sales</option>
-                        <option>Support</option>
-                        <option>General Inquiry</option>
-                    </select>
+                <!-- Room Selection Step -->
+                <div class="hidden step" id="room">
+                    <div class="mb-4">
+                        <label for="room_type" class="block text-gray-600">Room Type</label>
+                        <select id="room_type" name="room_type" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                            <option value="single">Single Room</option>
+                            <option value="double">Double Room</option>
+                            <option value="suite">Suite</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="check_in_date" class="block text-gray-600">Check-in Date</label>
+                        <input type="date" id="check_in_date" name="check_in_date" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                    </div>
+                    <!-- Add more room selection fields here -->
+                    <button type="button" class="prev-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300" data-prev-step="personal">Previous</button>
+                    <button type="button" class="next-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300" data-next-step="payment">Next</button>
                 </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="newsletter">
-                    <label class="form-check-label" for="newsletter">Subscribe to Newsletter</label>
+
+                <!-- Payment Step -->
+                <div class="hidden step" id="payment">
+                    <div class="mb-4">
+                        <label for="payment_method" class="block text-gray-600">Payment Method</label>
+                        <select id="payment_method" name="payment_method" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" required>
+                            <option value="credit_card">Credit Card</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="bank_transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="card_number" class="block text-gray-600">Card Number</label>
+                        <input type="text" id="card_number" name="card_number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="** ** ** **" required>
+                    </div>
+                    <!-- Add more payment fields here -->
+                    <button type="button" class="prev-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300" data-prev-step="room">Previous</button>
+                    <button type="button" class="next-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300" data-next-step="review">Next</button>
                 </div>
-                <div class="step-button-container">
-                    <button type="button" class="btn btn-primary step-button" onclick="prevStep(2)">Previous</button>
-                    <button type="submit" class="btn btn-primary step-button">Submit</button>
+
+                <!-- Review Step -->
+                <div class="hidden step" id="review">
+                    <h2 class="text-xl font-semibold mb-4">Review Your Information</h2>
+                    <!-- Display a summary of entered information here -->
+                    <!-- You can use JavaScript to dynamically populate this section based on user inputs -->
+                    <button type="button" class="prev-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300" data-prev-step="payment">Previous</button>
+                    <button type="submit"
+[12:50 PM, 10/10/2023] Zaid AZ: class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300">Submit</button>
                 </div>
-            </div>
-        </form>
+            </form>
+
+        </div>
     </div>
-    <!-- Add Bootstrap JS and jQuery (for Bootstrap) links if needed -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-        // Form validation
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            let valid = true;
-            const fullName = document.getElementById('fullName');
-            const email = document.getElementById('email');
-            const phone = document.getElementById('phone');
+        // JavaScript for handling step navigation
+        const steps = document.querySelectorAll('.step');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const nextButtons = document.querySelectorAll('.next-button');
+        const prevButtons = document.querySelectorAll('.prev-button');
 
-            // Full Name validation
-            if (fullName.value.trim() === '') {
-                document.getElementById('fullNameAlert').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('fullNameAlert').style.display = 'none';
-            }
-
-            // Email validation
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (!emailPattern.test(email.value)) {
-                document.getElementById('emailAlert').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('emailAlert').style.display = 'none';
-            }
-
-            // Phone Number validation
-            if (phone.value.trim() === '') {
-                document.getElementById('phoneAlert').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('phoneAlert').style.display = 'none';
-            }
-
-            if (!valid) {
+        tabButtons.forEach((button) => {
+            button.addEventListener('click', (e) => {
                 e.preventDefault();
-            }
+                const stepId = e.target.getAttribute('data-step');
+                showStep(stepId);
+            });
         });
 
-        // Step navigation
-        function nextStep(step) {
-            document.getElementById(`step-${step}`).classList.remove('active');
-            document.getElementById(`step-${step + 1}`).classList.add('active');
-        }
+        nextButtons.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const currentStepId = e.target.closest('.step').id;
+                const nextStepId = e.target.getAttribute('data-next-step');
+                showStep(nextStepId);
+            });
+        });
 
-        function prevStep(step) {
-            document.getElementById(`step-${step}`).classList.remove('active');
-            document.getElementById(`step-${step - 1}`).classList.add('active');
+        prevButtons.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const currentStepId = e.target.closest('.step').id;
+                const prevStepId = e.target.getAttribute('data-prev-step');
+                showStep(prevStepId);
+            });
+        });
+
+        function showStep(stepId) {
+            steps.forEach((step) => {
+                if (step.id === stepId) {
+                    step.classList.remove('hidden');
+                } else {
+                    step.classList.add('hidden');
+                }
+            });
         }
     </script>
 </body>
